@@ -2,8 +2,6 @@ class_name Lobby
 extends Control
 
 
-signal joined_lobby(lobby_id: int)
-
 var lobby_name: String:
 	set(value):
 		lobby_name = value
@@ -35,7 +33,7 @@ var lobby_id: int
 
 
 func _on_join_pressed() -> void:
-	joined_lobby.emit(lobby_id)
+	Network.join_lobby(lobby_id)
 
 
 func set_lobby_name() -> void:
