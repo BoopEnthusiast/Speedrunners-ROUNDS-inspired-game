@@ -2,7 +2,7 @@ class_name MainMenu
 extends Control
 
 
-signal play_pressed()
+signal play_pressed
 
 @onready var lobby_id: LineEdit = $VBoxContainer/LobbyID
 

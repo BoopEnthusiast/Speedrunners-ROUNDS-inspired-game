@@ -16,3 +16,15 @@ shape = SubResource("RectangleShape2D_j8wxg")
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(36, 60)
 texture = SubResource("PlaceholderTexture2D_y120n")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="JumpTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.4
+one_shot = true
+
+[node name="CoyoteTime" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true

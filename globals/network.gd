@@ -15,7 +15,7 @@ func _ready() -> void:
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if lobby_id > 0:
 		read_all_p2p_packets()
 
