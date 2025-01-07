@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0gp8rfek1fey"]
+
+[ext_resource type="Script" path="res://manager/game_manager.gd" id="1_i75tk"]
+[ext_resource type="PackedScene" uid="uid://cveoaqbghv0jl" path="res://menus/main_menu.tscn" id="2_ektgr"]
+[ext_resource type="PackedScene" uid="uid://bjrucaeqbqclu" path="res://levels/test_level.tscn" id="2_mt1tn"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_i75tk")
+selected_level = ExtResource("2_mt1tn")
+
+[node name="BaseMenuLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="BaseMenuLayer" instance=ExtResource("2_ektgr")]
+
+[connection signal="play_pressed" from="BaseMenuLayer/MainMenu" to="." method="_on_main_menu_play_pressed"]

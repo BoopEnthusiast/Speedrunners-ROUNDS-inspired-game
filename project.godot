@@ -1,0 +1,26 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Speedrounds"
+run/main_scene="res://manager/game_manager.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://misc/icon.svg"
+
+[autoload]
+
+Nodes="*res://globals/nodes.gd"
+Networking="*res://globals/networking.gd"
+Network="*res://globals/network.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
