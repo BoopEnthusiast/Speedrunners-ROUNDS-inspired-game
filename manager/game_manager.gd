@@ -3,28 +3,28 @@ extends Node2D
 
 
 # Game Manager variables
-const MAIN_MENU = preload("res://menus/main_menu.tscn")
 const PLAYER = preload("res://entities/player.tscn")
 
 @export 
 var selected_level: PackedScene
 
-var main_menu: MainMenu
 var players: Array[Player]
 var level: Level
 
 @onready 
 var base_menu_layer: CanvasLayer = $BaseMenuLayer
+@onready 
+var main_menu: MainMenu = $BaseMenuLayer/MainMenu
+@onready 
+var lobby_list: LobbyList = $BaseMenuLayer/LobbyList
 
 
-func _ready() -> void:
-	main_menu = MAIN_MENU.instantiate()
-	base_menu_layer.add_child(main_menu)
-	main_menu.play_pressed.connect(_on_main_menu_play_pressed)
+func _enter_tree() -> void:
+	Nodes.game_manager = self
 
 
 func _on_main_menu_play_pressed() -> void:
-	main_menu.queue_free()
+	main_menu.visible = false
 	
 	var new_player = PLAYER.instantiate()
 	players.append(new_player)
@@ -32,3 +32,8 @@ func _on_main_menu_play_pressed() -> void:
 	
 	level = selected_level.instantiate()
 	add_child(level)
+
+func _on_main_menu_join_pressed() -> void:
+	main_menu.visible = false
+	lobby_list.visible = true
+	lobby_list.refresh()

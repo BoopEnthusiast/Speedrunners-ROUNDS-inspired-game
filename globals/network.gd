@@ -6,13 +6,27 @@ const PACKET_READ_LIMIT: int = 32
 var is_host: bool = false
 var lobby_id: int = 0
 var lobby_members: Array = []
-var lobby_members_max: int = 4
+var lobby_members_max: int = 5
 
 
 func _ready() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
+	
+	
+	# Check if the game was run by joining a friend's lobby # TODO: Come back after setting up steamworks
+	var these_arguments: Array = OS.get_cmdline_args()
+	# There are arguments to process
+	if these_arguments.size() > 0:
+		# A Steam connection argument exists
+		if these_arguments[0] == "+connect_lobby":
+			# Lobby invite exists so try to connect to it
+			if int(these_arguments[1]) > 0:
+				# At this point, you'll probably want to change scenes
+				# Something like a loading into lobby screen
+				print("Command line lobby ID: ", these_arguments[1])
+				join_lobby(int(these_arguments[1]))
 
 
 func _process(_delta: float) -> void:
@@ -29,14 +43,15 @@ func create_lobby() -> void:
 func _on_lobby_created(connect: int, this_lobby_id: int):
 	if connect == 1:
 		lobby_id = this_lobby_id
+		print("Created lobby: ", lobby_id)
 		
 		Steam.setLobbyJoinable(lobby_id, true)
 		
 		Steam.setLobbyData(lobby_id, "name", "New Lobby")
-		
-		print("Created lobby: ", lobby_id)
+		Steam.setLobbyData(lobby_id, "mode", "GodotSteam test")
 		
 		var set_relay: bool = Steam.allowP2PPacketRelay(true)
+		print("Allowing Steam to be relay backup: ", set_relay)
 
 
 func join_lobby(this_lobby_id: int): 

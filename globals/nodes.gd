@@ -7,3 +7,4 @@ extends Node
 ## Always check that the node exists before using it.
 
 var player: Player
+var game_manager: GameManager

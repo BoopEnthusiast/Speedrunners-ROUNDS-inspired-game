@@ -3,6 +3,7 @@ extends Control
 
 
 signal play_pressed
+signal join_pressed
 
 @onready var lobby_id: LineEdit = $VBoxContainer/LobbyID
 
@@ -12,8 +13,9 @@ func _on_host_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
-	var id: int = int(lobby_id.text.strip_edges())
-	Network.join_lobby(id)
+	join_pressed.emit()
+	#var id: int = int(lobby_id.text.strip_edges())
+	#Network.join_lobby(id)
 	
 
 

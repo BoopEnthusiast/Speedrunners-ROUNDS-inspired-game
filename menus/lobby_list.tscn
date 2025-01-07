@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://d30o4usaduw41"]
+
+[ext_resource type="Script" path="res://menus/lobby_list.gd" id="1_32ru5"]
+[ext_resource type="Theme" uid="uid://d3mjqj5le7q7p" path="res://menus/button.tres" id="2_o13w5"]
+[ext_resource type="PackedScene" uid="uid://bciwj2ekyrcmt" path="res://menus/lobby.tscn" id="3_27nla"]
+
+[node name="LobbyList" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_32ru5")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_o13w5")
+
+[node name="Scroll" type="ScrollContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Margin/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="Margin/Scroll/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Lobby" parent="Margin/Scroll/HBox/List" instance=ExtResource("3_27nla")]
+layout_mode = 2

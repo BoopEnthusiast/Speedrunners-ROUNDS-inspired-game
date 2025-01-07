@@ -11,7 +11,12 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	Steam.steamInit()
+	var steam_init_response: Dictionary = Steam.steamInitEx()
+	print("Steam init: ", steam_init_response)
+	
+	if steam_init_response['status'] > 0:
+		print("Failed to initialize Steam, shutting down: ", steam_init_response)
+		get_tree().quit()
 	
 	steam_id = Steam.getSteamID()
 	steam_username = Steam.getPersonaName()
