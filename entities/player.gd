@@ -10,9 +10,11 @@ const JUMP_GRAVITY_MODIFIER = 0.3
 
 var was_on_floor := false
 var has_double_jumped := false
+var is_jump_buffered := false
 
 @onready var jump_timer: Timer = $JumpTimer
 @onready var coyote_time: Timer = $CoyoteTime
+@onready var jump_buffer: Timer = $JumpBuffer
 
 
 func _physics_process(delta: float) -> void:
@@ -30,15 +32,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"):
+		is_jump_buffered = true
+		jump_buffer.start()
+	elif Input.is_action_just_released("jump"):
+		jump_timer.stop()
+	
+	if is_jump_buffered:
 		if is_on_floor() or not coyote_time.is_stopped():
 			velocity.y = JUMP_VELOCITY
 			jump_timer.start()
 			coyote_time.stop()
+			is_jump_buffered = false
 		elif not has_double_jumped:
 			velocity.y = JUMP_VELOCITY
 			has_double_jumped = true
-	elif Input.is_action_just_released("jump"):
-		jump_timer.stop()
+			is_jump_buffered = false
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
@@ -59,3 +67,7 @@ func jump() -> void:
 	velocity.y = JUMP_VELOCITY
 	jump_timer.start()
 	coyote_time.stop()
+
+
+func _on_jump_buffer_timeout() -> void:
+	is_jump_buffered = false
