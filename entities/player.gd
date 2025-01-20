@@ -5,6 +5,10 @@ extends CharacterBody2D
 const RUN_ACCEL = 30.0
 const RUN_SPEED = 500.0
 
+const SLIDE_FRICTION = 0.95
+
+const AIR_ACCEL = 20.0
+
 const JUMP_VELOCITY = -300.0
 const JUMP_GRAVITY_MODIFIER = 0.3
 
@@ -18,7 +22,6 @@ var is_jump_buffered := false
 
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if not is_on_floor():
 		if was_on_floor:
 			coyote_time.start()
@@ -30,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		has_double_jumped = false
 	
-	# Handle jump.
+	
 	if Input.is_action_just_pressed("jump"):
 		is_jump_buffered = true
 		jump_buffer.start()
@@ -48,12 +51,18 @@ func _physics_process(delta: float) -> void:
 			has_double_jumped = true
 			is_jump_buffered = false
 	
+	
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	if direction:
-		velocity.x = move_toward(velocity.x, direction * RUN_SPEED, RUN_ACCEL)
+		velocity.x = move_toward(velocity.x, direction * RUN_SPEED if abs(direction * RUN_SPEED) >= abs(velocity.x) else velocity.x, RUN_ACCEL if is_on_floor() else AIR_ACCEL)
 	else:
-		velocity.x = move_toward(velocity.x, 0, RUN_ACCEL)
+		velocity.x = move_toward(velocity.x, 0, RUN_ACCEL if is_on_floor() else AIR_ACCEL)
+	
+	
+	if not was_on_floor and is_on_floor():
+		velocity = get_real_velocity().slide(get_floor_normal())
+	
 	
 	if not Input.is_action_just_pressed("jump"):
 		was_on_floor = is_on_floor()

@@ -2,16 +2,20 @@
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a6cuh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8wxg"]
-size = Vector2(36, 60)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tox55"]
+radius = 18.0
+height = 60.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y120n"]
 
 [node name="Player" type="CharacterBody2D"]
+floor_stop_on_slope = false
+floor_max_angle = 1.22173
+floor_snap_length = 32.0
 script = ExtResource("1_a6cuh")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_j8wxg")
+shape = SubResource("CapsuleShape2D_tox55")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(36, 60)

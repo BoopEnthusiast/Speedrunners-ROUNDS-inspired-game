@@ -40,8 +40,8 @@ func create_lobby() -> void:
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max)
 
 
-func _on_lobby_created(connect: int, this_lobby_id: int):
-	if connect == 1:
+func _on_lobby_created(connected: int, this_lobby_id: int):
+	if connected == 1:
 		lobby_id = this_lobby_id
 		print("Created lobby: ", lobby_id)
 		
@@ -117,7 +117,7 @@ func send_p2p_packet(this_target: int, packet_data: Dictionary, send_type: int =
 
 
 func _on_p2p_session_request(remote_id: int):
-	var this_requester: String = Steam.getFriendPersonaName(remote_id)
+	var _this_requester: String = Steam.getFriendPersonaName(remote_id)
 	
 	Steam.acceptP2PSessionWithUser(remote_id)
 	
@@ -149,7 +149,7 @@ func read_p2p_packet():
 	if packet_size > 0:
 		var this_packet: Dictionary = Steam.readP2PPacket(packet_size)
 		
-		var packet_sender: int = this_packet['remote_steam_id']
+		var _packet_sender: int = this_packet['remote_steam_id']
 		
 		var packet_code: PackedByteArray = this_packet['data']
 		var readable_data: Dictionary = bytes_to_var(packet_code)

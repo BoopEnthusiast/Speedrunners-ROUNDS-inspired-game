@@ -29,7 +29,6 @@ var lobby_id: int
 @onready var _name_node: Label = $HBox/Name
 @onready var _mode: Label = $HBox/Mode
 @onready var _player_count: Label = $HBox2/PlayerCount
-@onready var _join: Button = $HBox2/Join
 
 
 func _on_join_pressed() -> void:
