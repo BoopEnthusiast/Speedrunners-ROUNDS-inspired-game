@@ -4,6 +4,7 @@ extends Control
 
 signal play_pressed
 signal join_pressed
+signal editor_pressed
 
 @onready var lobby_id: LineEdit = $VBoxContainer/LobbyID
 
@@ -21,3 +22,7 @@ func _on_join_pressed() -> void:
 
 func _on_play_pressed() -> void:
 	play_pressed.emit()
+
+
+func _on_editor_pressed() -> void:
+	editor_pressed.emit()

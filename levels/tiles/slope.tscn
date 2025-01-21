@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://4lcl2hrpf3ek"]
+
+[node name="Slope" type="StaticBody2D"]
+
+[node name="PolygonSprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(16, 16, 16, -16, -16, 16)
+
+[node name="Collider2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16, 16, 16, -16, 16, 16)

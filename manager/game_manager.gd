@@ -4,12 +4,14 @@ extends Node2D
 
 # Game Manager variables
 const PLAYER = preload("res://entities/player.tscn")
+const EDITOR = preload("res://levels/level_editor/editor.tscn")
 
 @export 
 var selected_level: PackedScene
 
 var players: Array[Player]
 var level: Level
+var editor: LevelEditor
 
 @onready 
 var base_menu_layer: CanvasLayer = $BaseMenuLayer
@@ -37,6 +39,12 @@ func _on_main_menu_join_pressed() -> void:
 	main_menu.visible = false
 	lobby_list.visible = true
 	lobby_list.refresh()
+
+
+func _on_main_menu_editor_pressed() -> void:
+	main_menu.visible = false
+	editor = EDITOR.instantiate()
+	add_child(editor)
 
 
 func join_lobby() -> void:

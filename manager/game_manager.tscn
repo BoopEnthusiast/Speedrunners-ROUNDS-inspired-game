@@ -16,5 +16,6 @@ selected_level = ExtResource("2_mt1tn")
 [node name="LobbyList" parent="BaseMenuLayer" instance=ExtResource("4_mi4ry")]
 visible = false
 
+[connection signal="editor_pressed" from="BaseMenuLayer/MainMenu" to="." method="_on_main_menu_editor_pressed"]
 [connection signal="join_pressed" from="BaseMenuLayer/MainMenu" to="." method="_on_main_menu_join_pressed"]
 [connection signal="play_pressed" from="BaseMenuLayer/MainMenu" to="." method="_on_main_menu_play_pressed"]
