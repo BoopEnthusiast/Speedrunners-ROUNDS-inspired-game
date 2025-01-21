@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=4 uid="uid://dsnp58o5wmddi"]
+[gd_scene load_steps=4 format=4 uid="uid://dsnp58o5wmddi"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_s2355"]
 [ext_resource type="TileSet" uid="uid://bos73gd2i6jc5" path="res://levels/tiles/tileset.tres" id="2_gbrtc"]
+[ext_resource type="Script" path="res://levels/tiles/main_tile_map.gd" id="3_gufpc"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_s2355")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="MainTileMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQD+/wAAAAAAAAAAAQD9/wAAAAAAAAAAAQD8/wAAAAAAAAAAAQD7/wAAAAAAAAAAAQD6/wAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAAAAAAAAAAAAAQA=")
 tile_set = ExtResource("2_gbrtc")
+script = ExtResource("3_gufpc")
