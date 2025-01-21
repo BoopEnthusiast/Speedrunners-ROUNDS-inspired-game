@@ -12,9 +12,11 @@ const AIR_ACCEL = 20.0
 const JUMP_VELOCITY = -300.0
 const JUMP_GRAVITY_MODIFIER = 0.3
 
-var was_on_floor := false
 var has_double_jumped := false
 var is_jump_buffered := false
+
+var was_on_floor := false
+var previous_floor_normal := Vector2.ZERO
 
 @onready var jump_timer: Timer = $JumpTimer
 @onready var coyote_time: Timer = $CoyoteTime
@@ -55,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	if direction:
-		velocity.x = move_toward(velocity.x, direction * RUN_SPEED if abs(direction * RUN_SPEED) >= abs(velocity.x) else velocity.x, RUN_ACCEL if is_on_floor() else AIR_ACCEL)
+		velocity.x = move_toward(velocity.x, direction * RUN_SPEED if abs(direction * RUN_SPEED) >= abs(velocity.x) else abs(velocity.x) * direction, RUN_ACCEL if is_on_floor() else AIR_ACCEL)
 	else:
 		velocity.x = move_toward(velocity.x, 0, RUN_ACCEL if is_on_floor() else AIR_ACCEL)
 	
@@ -68,6 +70,8 @@ func _physics_process(delta: float) -> void:
 		was_on_floor = is_on_floor()
 	else:
 		was_on_floor = false
+	if is_on_floor():
+		previous_floor_normal = get_floor_normal()
 	
 	move_and_slide()
 

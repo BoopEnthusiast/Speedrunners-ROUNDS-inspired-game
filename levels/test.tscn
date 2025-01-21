@@ -33,7 +33,7 @@ position = Vector2(-808, 946)
 rotation = 1.57079
 
 [node name="Platform8" parent="." index="7" instance=ExtResource("2_vy2ct")]
-position = Vector2(-859, 1256)
+position = Vector2(-864, 1296)
 rotation = 2.35619
 
 [node name="Platform9" parent="." index="8" instance=ExtResource("2_vy2ct")]
@@ -45,7 +45,7 @@ position = Vector2(-1809, 1341)
 rotation = 3.14159
 
 [node name="Platform11" parent="." index="10" instance=ExtResource("2_vy2ct")]
-position = Vector2(-2321, 1218)
+position = Vector2(-2371, 1219)
 rotation = 3.66519
 
 [node name="Platform12" parent="." index="11" instance=ExtResource("2_vy2ct")]
