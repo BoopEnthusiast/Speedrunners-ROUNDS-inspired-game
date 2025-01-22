@@ -21,11 +21,11 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		# Place selected cell
-		if event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
 			place_cell(event.global_position)
 		# Erase cell
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			level.main_tile_map.erase_cell(level.main_tile_map.get_cell_at_global(event.global_position))
+		elif event.button_mask == MOUSE_BUTTON_MASK_RIGHT:
+			level.main_tile_map.erase_cell(level.main_tile_map.get_cell_at_global(level.main_tile_map.get_local_mouse_position()))
 		# Pan the screen when moving the mouse and holding LMB
 		if event is InputEventMouseMotion:
 			if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
@@ -39,6 +39,6 @@ func _input(event: InputEvent) -> void:
 
 
 func place_cell(global_pos: Vector2) -> void:
-	var tile = level.main_tile_map.get_cell_at_global(global_pos)
+	var tile = level.main_tile_map.get_cell_at_global(level.main_tile_map.get_local_mouse_position())
 	print(tile)
 	level.main_tile_map.set_cell(tile, 0, selected_tile)
