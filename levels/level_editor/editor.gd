@@ -8,7 +8,7 @@ const TEST = preload("res://levels/test.tscn")
 
 var level: Level
 
-var selected_tile: Vector2i = Vector2i(1, 1)
+var selected_tile: Vector2i = Vector2i(0, 0)
 
 @onready var camera: Camera2D = $Camera
 
@@ -40,5 +40,4 @@ func _input(event: InputEvent) -> void:
 
 func place_cell(global_pos: Vector2) -> void:
 	var tile = level.main_tile_map.get_cell_at_global(level.main_tile_map.get_local_mouse_position())
-	print(tile)
-	level.main_tile_map.set_cell(tile, 0, selected_tile)
+	level.main_tile_map.set_cell(tile, 0, Vector2i(0, 0), 1)
